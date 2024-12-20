@@ -35,7 +35,7 @@ function parseXMLResponse(xml: string) {
       result.hosts.push(host);
     }
   }
-  const domainMatches = xml.matchAll(/<Domain(.*?)>/g);
+  const domainMatches = xml.matchAll(/<Domain\b(.*?)>/g);
   if (domainMatches) {
     result.domains = [];
     for (const match of domainMatches) {
@@ -54,9 +54,17 @@ const url = `${config.baseUrl}?${urlParams.toString()}`;
 
 console.log(url);
 
-fetch(url)
-  .then((response) => response.text())
-  .then((data) => {
-    console.log(parseXMLResponse(data));
-    //console.log(data);
-  });
+(async () => {
+  try {
+    const response = await fetch(url);
+    const data = await response.text();
+    const parsed = parseXMLResponse(data);
+
+    const domains = parsed.domains.map(
+      (domain: Record<string, string>) => domain.Name,
+    );
+    console.log(domains);
+  } catch (error) {
+    console.error("Error fetching data from Namecheap API", error);
+  }
+})();
