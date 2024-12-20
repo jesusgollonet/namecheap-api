@@ -1,0 +1,1 @@
+map ,r :w \| :!tsc && node dist/index.js<cr>
