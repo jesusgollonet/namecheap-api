@@ -4,15 +4,12 @@ import { createConfig } from "./src/api";
 
 dotenv.config();
 const config = createConfig();
-console.log(config);
 
 (async () => {
   try {
     const namecheap = createNamecheapClient(config);
     const domains = await namecheap.domains.getList();
-    console.log(domains);
     const hosts = await namecheap.domains.dns.getHosts("overy.club");
-    console.log(hosts);
     await namecheap.domains.dns.setHost(
       "example.com",
       "A",
