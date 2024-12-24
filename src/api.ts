@@ -4,14 +4,6 @@ export interface Config {
   userName: string;
   clientIp: string;
 }
-export function createConfig() {
-  return {
-    baseUrl: "https://api.namecheap.com/xml.response",
-    apiKey: process.env.API_KEY || "",
-    userName: process.env.USERNAME || "",
-    clientIp: process.env.CLIENT_IP || "",
-  };
-}
 export function buildCommandUrl(
   config: Config,
   command: string,
