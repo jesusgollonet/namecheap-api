@@ -1,5 +1,9 @@
 {
   "name": "namecheap-client",
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.1.0",
   "description": "Node.js client for Namecheap API. Focus is DNS Management",
   "main": "dist/index.js",
@@ -9,7 +13,11 @@
     "test": "vitest run"
   },
   "keywords": [],
-  "author": "",
+  "author": {
+    "name": "Jesus Gollonet",
+    "email": "me@jesusgollonet.com",
+    "url": "https://jesusgollonet.com"
+  },
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^22.10.2",
