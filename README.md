@@ -2,6 +2,39 @@
 
 A TypeScript client for the Namecheap API focusing on domain and DNS management. Built with a functional programming approach for better testing and composability.
 
+## Installation
+
+```npm install namecheap-client```
+
+## Quick Start
+
+```typescript
+import { createNamecheapClient } from 'namecheap-client';
+
+const client = createNamecheapClient({
+  baseUrl: "https://api.namecheap.com/xml.response",
+  apiKey: "your-api-key",
+  userName: "your-username",
+  clientIp: "your-ip"
+});
+
+### Examples
+
+```typescript
+// List all domains
+const domains = await client.domains.getList();
+
+// Get DNS records for a domain
+const hosts = await client.domains.dns.getHosts("example.com");
+
+// Add a new A record
+await client.domains.dns.setHost(
+  "example.com",
+  "A",
+  "blog",
+  "192.0.2.1"
+);
+
 ## Current Status
 
 Currently implements:
@@ -16,25 +49,3 @@ The DNS host management includes several safety measures to prevent accidental d
 - Validation checks
 - Preserves all existing records when adding new ones
 
-## Usage
-
-```typescript
-import { createNamecheapClient, createConfig } from './src/namecheap';
-
-// Initialize client
-const config = createConfig();
-const namecheap = createNamecheapClient(config);
-
-// List domains
-const domains = await namecheap.domains.getList();
-
-// Get DNS hosts for a domain
-const hosts = await namecheap.domains.dns.getHosts("example.com");
-
-// Add a new DNS record (safely preserves existing records)
-await namecheap.domains.dns.setHost(
-  "example.com",
-  "A",
-  "subdomain",
-  "123.45.67.89"
-);
